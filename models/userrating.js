@@ -14,8 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserRating.init({
-    userId: DataTypes.INTEGER,
-    petId: DataTypes.INTEGER
+    userrating: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    },
+    petId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'pets',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'UserRating',
