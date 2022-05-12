@@ -1,6 +1,6 @@
 const { Pet } = require('../models')
 
-const GetAllPets = async (req, res) => {
+const GetPets = async (req, res) => {
   try {
     const pets = await Pet.findAll()
     res.send(pets)
@@ -10,5 +10,5 @@ const GetAllPets = async (req, res) => {
 }
 
 module.exports = {
-	GetAllPets
+	GetPets
 }
