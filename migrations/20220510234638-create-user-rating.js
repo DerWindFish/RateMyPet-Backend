@@ -11,9 +11,6 @@ module.exports = {
       userrating: {
         type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER
-      },
       petId: {
         type: Sequelize.INTEGER
       },

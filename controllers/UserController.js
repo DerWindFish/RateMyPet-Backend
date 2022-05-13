@@ -13,14 +13,7 @@ const GetUsers = async (req, res) => {
 
 const GetOneUser = async (req, res) => {
   try {
-    const users = await User.findByPk(req.params.me, {
-      include: [
-        {
-          model: Pet,
-          as: 'user_rating' 
-        }
-      ]
-    })
+    const users = await User.findByPk(req.params.me, {})
 
     res.send(users)
   } catch (error) {
