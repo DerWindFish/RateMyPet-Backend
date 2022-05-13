@@ -10,7 +10,7 @@ module.exports = {
     
     const ratings = petlist.map((a) => ({
       petId: petlist[Math.floor(Math.random() * petlist.length)].id,
-      userRatingId: userRatings[Math.floor(Math.random() * userRatings.length)].id,
+      userRatingId: a.id,
       createdAt: new Date(),
       updatedAt: new Date()
     }))
