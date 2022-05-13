@@ -9,7 +9,6 @@ const GetRatingsList = async (req, res) => {
                     model: UserRating,
                     as: 'ratings'
                 }
-                
             ]
         })
         res.send(list)
