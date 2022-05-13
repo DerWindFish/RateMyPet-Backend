@@ -14,11 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Rating.init({
-    petId: DataTypes.INTEGER,
-    userRatingId: DataTypes.INTEGER
+    petId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'pets',
+        key: 'id'
+      }
+    },
+    userRatingId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'userrating',
+        key: 'id'
+      }
+    },
   }, {
     sequelize,
     modelName: 'Rating',
+    tableName: 'ratings'
   });
   return Rating;
 };
