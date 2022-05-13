@@ -1,20 +1,12 @@
-const { Pet, UserRating } = require('../models')
+const { UserRating } = require('../models')
 const Sequelize = require('sequelize')
-
 
 const GetRatings = async (req, res) => {
   try {
-    const list = await UserRating.findAll({
-      include: [
-        {
-          model: Pet,
-          as: 'userrating' 
-        }
-      ]
-    })
-    res.send(list)
+    const userRatings = await UserRating.findAll()
+    res.send(userRatings)
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
