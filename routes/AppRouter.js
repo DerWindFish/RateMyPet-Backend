@@ -6,5 +6,5 @@ const RatingRouter = require('./RatingRouter')
 Router.use('/users', UserRouter)
 Router.use('/pets', PetRouter)
 Router.use('/userratings',UserRatingRouter)
-Router.use('./ratings', RatingRouter)
+Router.use('/ratings', RatingRouter)
 module.exports = Router
