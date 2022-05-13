@@ -1,24 +1,22 @@
 'use strict';
 
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-  },
+const{Pet, UserRating} = require('../models')
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    
+    const petlist = await Pet.findAll({ raw: true })
+    const userRatings = await UserRating.findAll({ raw: true })
+    
+    const ratings = petlist.map((a) => ({
+      petId: petlist[Math.floor(Math.random() * petlist.length)].id,
+      userRatingId: userRatings[Math.floor(Math.random() * userRatings.length)].id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }))
+    await queryInterface.bulkInsert('ratings', ratings)
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('ratings')
   }
-};
+}
