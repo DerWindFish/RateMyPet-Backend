@@ -1,18 +1,27 @@
-const { Review } = require('../models/reviews')
+const { Reviews } = require('../models')
 
 const GetReviews = async (req, res) => {
     try {
-      const review = await Review.findAll()
+      const review = await Reviews.findAll()
       res.send(review)
     } catch (error) {
       throw error
     }
   }
+
+  const GetReviewDetails = async (req, res) => {
+      try {
+          const getReview = await Reviews.findByPk(req.params.id)
+          res.send(getReview)
+      } catch (error) {
+          throw error
+      }
+  }
   
   const AddReviews = async (req, res) => {
     try {
       const { name, review } = req.body
-      const addReview = await Review.create({ name, review })
+      const addReview = await Reviews.create({ name, review })
       res.send(addReview)
   
     } catch (error) {
@@ -22,8 +31,8 @@ const GetReviews = async (req, res) => {
 
   const DeleteReview = async (req, res) => {
       try {
-          let reviewId = parseInt(req.params.review_id)
-          await Review.destroy({where: {id: reviewId}})
+          let reviewId = parseInt(req.params.id)
+          await Reviews.destroy({where: {id: reviewId}})
           res.send('Review Deleted ')
       } catch (error) {
           throw error
@@ -32,7 +41,11 @@ const GetReviews = async (req, res) => {
 
   const UpdateReview = async (req, res) => {
       try {
-          let updatedReview = await Review.update(req.body.id)
+          let reviewId = parseInt(req.params.id)
+          let updatedReview = await Reviews.update(req.body, {
+              where: { id: reviewId },
+              returning: true
+          })
           res.send(updatedReview)
       } catch (error) {
           throw error
@@ -41,6 +54,7 @@ const GetReviews = async (req, res) => {
   
   module.exports = {
       GetReviews,
+      GetReviewDetails,
       AddReviews,
       DeleteReview,
       UpdateReview
