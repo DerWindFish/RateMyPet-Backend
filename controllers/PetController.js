@@ -9,6 +9,18 @@ const GetPets = async (req, res) => {
   }
 }
 
+const AddPets = async (req, res) => {
+  try {
+    const { image_url, rating } = req.body
+    const pets = await Pet.create({ image_url, rating })
+    res.send(pets)
+
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
-	GetPets
+	GetPets,
+  AddPets
 }

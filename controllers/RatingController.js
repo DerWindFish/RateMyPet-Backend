@@ -17,6 +17,20 @@ const GetRatingsList = async (req, res) => {
     }
 }
 
+const GetPetsRatingList = async (req, res) => {
+    try {
+        const list = await Rating.findAll({
+            where: {petId: req.params.pet,
+            userRatingId: req.params.userrating}
+        })
+        res.send(list)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
-    GetRatingsList
+    GetRatingsList,
+    GetPetsRatingList
+
 }
