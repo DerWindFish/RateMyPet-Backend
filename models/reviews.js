@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Reviews',
+    tableName: 'reviews'
   });
   return Reviews;
 };
